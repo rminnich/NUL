@@ -46,7 +46,7 @@ struct BaseProgram {
    * This layout is chosen to make the stack 16-byte aligned.
    */
   static Utcb *myutcb(unsigned long esp = 0) {
-    if (!esp) asm volatile ("mov %%esp, %0" : "=g"(esp));
+    if (!esp) asm volatile ("mov %%rsp, %0" : "=g"(esp));
     return *reinterpret_cast<Utcb **>( ((esp & ~(stack_size-1)) + stack_size - 1*sizeof(void *)));
   };
 

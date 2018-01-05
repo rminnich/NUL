@@ -23,10 +23,7 @@
 
 #include <nul/compiler.h>
 
-#if !defined(__i386) || !defined(__GNUC__)
-#error Your platform is not supported.
-#endif
-
+#if 0
 BEGIN_EXTERN_C
 #ifdef __MMX__
 #include <mmintrin.h>
@@ -40,6 +37,7 @@ BEGIN_EXTERN_C
 #include <tmmintrin.h>
 #endif
 END_EXTERN_C
+#endif
 
 /* Constant-width integer types. */
 typedef unsigned long long uint64;
@@ -53,6 +51,7 @@ typedef signed int       int32;
 typedef signed short     int16;
 typedef signed char      int8;
 
+typedef __SIZE_TYPE__ size_t;
 /* NUL specific types */
 
 typedef unsigned log_cpu_no;

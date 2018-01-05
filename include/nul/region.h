@@ -170,7 +170,7 @@ public:
   {
     Logging::printf("Region %s count %d\n", prefix, _count);
     for (Region *r = _list; r < _list + _count && r < _list + SIZE; r++)
-      Logging::printf("\t%4d virt %8llx end %8llx size %8llx phys %8llx\n", r - _list, r->virt, r->end(), r->size, r->phys);
+      Logging::printf("\t%4ld virt %8llx end %8llx size %8llx phys %8llx\n", r - _list, r->virt, r->end(), r->size, r->phys);
   }
 
   /*

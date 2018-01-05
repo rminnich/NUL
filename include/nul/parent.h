@@ -147,7 +147,7 @@ struct ParentProtocol {
                    unsigned cap_service, char * revoke_mem = 0)
   {
     assert(cap_service);
-    init_frame(utcb, TYPE_REGISTER, CAP_PARENT_ID) << cpu << Utcb::String(service) << reinterpret_cast<unsigned>(revoke_mem)
+    init_frame(utcb, TYPE_REGISTER, CAP_PARENT_ID) << cpu << Utcb::String(service) << reinterpret_cast<unsigned long>(revoke_mem)
 						   << Utcb::TypedMapCap(Crd(pt, 0, DESC_CAP_ALL)) << Crd(cap_service, 0, DESC_CAP_ALL);
     return call(utcb, CAP_PT_PERCPU, true);
   };

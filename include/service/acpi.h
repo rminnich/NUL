@@ -29,19 +29,16 @@ public:
   };
 
   class DeviceScope {
-    union {
-      const char *_base;
-      struct PACKED {
-        uint8  type;
-        uint8  length;
-        uint16 _res;
-        uint8  id;
-        uint8  start_bus;
-        uint8 path[];
-      } *_elem;
-    };
-    size_t _size_left;
-
+	  const char *_base;
+	  size_t _size_left;
+	  struct PACKED {
+		  uint8  type;
+		  uint8  length;
+		  uint16 _res;
+		  uint8  id;
+		  uint8  start_bus;
+		  uint8 path[];
+	  } *_elem;
   public:
     uint8     id()   const { return _elem->id; }
     ScopeType type() const { return ScopeType(_elem->type); }
@@ -74,20 +71,16 @@ public:
   };
 
   class Dhrd {
-    union {
-      const char *_base;
-      struct PACKED {
-        uint8  flags;
-        uint8  _res;
-        uint16 segment;
-        uint64 base;
-            
-        char     scope[];
-      } *_elem;
-    };
-    
-    size_t _size_left;
-
+	  const char *_base;
+	  size_t _size_left;
+	  struct PACKED {
+		  uint8  flags;
+		  uint8  _res;
+		  uint16 segment;
+		  uint64 base;
+		  
+		  char     scope[];
+	  } *_elem;
     
   public:
 

@@ -139,7 +139,7 @@ class Motherboard : public StaticReceiver<Motherboard>
         unsigned prefixlen = MIN(strcspn(current, word_separator()),
                                  strcspn(current, wordparam_separator()));
         if (strlen(strings[0]) == prefixlen && !memcmp(current, strings[0], prefixlen)) {
-          Logging::printf("\t=> %.*s <=\n", arglen, current);
+		Logging::printf("\t=> %.*s <=\n", (int)arglen, current);
 
           const char *s = current + prefixlen;
           if (s[0] && strcspn(current + prefixlen, wordparam_separator()) == 0) s++;
@@ -159,7 +159,7 @@ class Motherboard : public StaticReceiver<Motherboard>
           handled = true;
         }
       }
-      if (!handled) Logging::printf("Ignored parameter: '%.*s'\n", arglen, current);
+      if (!handled) Logging::printf("Ignored parameter: '%.*s'\n", (int)arglen, current);
     }
   }
 

@@ -83,13 +83,13 @@ static inline unsigned char nova_syscall1(unsigned w0)
  */
 static inline unsigned char nova_syscall(unsigned w0, unsigned w1, unsigned w2, unsigned w3, unsigned w4, unsigned *out1=0, unsigned *out2=0)
 {
-  asm volatile ("push %%ebp;"
-		"mov %%ecx, %%ebp;"
-		"mov %%esp, %%ecx;"
-		"mov $1f, %%edx;"
+  asm volatile ("push %%rbp;"
+		"mov %%rcx, %%rbp;"
+		"mov %%rsp, %%rcx;"
+		"mov $1f, %%rdx;"
 		"sysenter;"
 		"1: ;"
-		"pop %%ebp;"
+		"pop %%rbp;"
 		: "+a" (w0), "+D" (w1), "+S" (w2), "+c"(w4)
 		:  "b"(w3)
 		: "edx", "memory");
@@ -108,7 +108,7 @@ static inline unsigned char  nova_create_pd (unsigned idx_pd, Crd pt_crd, unsign
 static inline unsigned char  nova_create_ec(unsigned idx_ec, void *utcb, void *esp, unsigned char cpunr, unsigned excpt_base, bool worker, unsigned dstpd = NOVA_DEFAULT_PD_CAP)
 {
   return nova_syscall(idx_ec << 8 | (worker ? NOVA_CREATE_EC : NOVA_CREATE_ECCLIENT), dstpd,
-		      reinterpret_cast<unsigned>(utcb) | cpunr, reinterpret_cast<unsigned>(esp), excpt_base);
+		      reinterpret_cast<unsigned long>(utcb) | cpunr, reinterpret_cast<unsigned long>(esp), excpt_base);
 }
 
 WARN_UNUSED static inline unsigned char  nova_create_sc (unsigned idx_sc, unsigned idx_ec, Qpd qpd, unsigned cpu, unsigned dstpd = NOVA_DEFAULT_PD_CAP)
@@ -172,13 +172,13 @@ WARN_UNUSED static inline unsigned char  nova_semdownmulti(unsigned idx_sm)
 {  return nova_syscall1(idx_sm << 8 | NOVA_SEMCTL_DOWN_MULTI); }
 
 WARN_UNUSED static inline unsigned char  nova_assign_pci(unsigned pd, void *pf_cfg_mem, unsigned vf_rid)
-{  return nova_syscall(pd << 8 | NOVA_ASSIGN_PCI, reinterpret_cast<unsigned>(pf_cfg_mem), vf_rid, 0, 0); }
+{  return nova_syscall(pd << 8 | NOVA_ASSIGN_PCI, reinterpret_cast<unsigned long>(pf_cfg_mem), vf_rid, 0, 0); }
 
 
 WARN_UNUSED static inline unsigned char  nova_assign_gsi(unsigned idx_sm, unsigned cpu_nr, void *pci_cfg_mem=0, unsigned long long* msi_address=0, unsigned *msi_value = 0)
 {
   unsigned out1;
-  unsigned char res = nova_syscall(idx_sm << 8 | NOVA_ASSIGN_GSI, reinterpret_cast<unsigned>(pci_cfg_mem), cpu_nr, 0, 0, &out1, msi_value);
+  unsigned char res = nova_syscall(idx_sm << 8 | NOVA_ASSIGN_GSI, reinterpret_cast<unsigned long>(pci_cfg_mem), cpu_nr, 0, 0, &out1, msi_value);
   if (msi_address) *msi_address = out1;
   return res;
 }
