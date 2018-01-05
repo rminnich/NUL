@@ -1,11 +1,11 @@
 [submodule "build/imgs"]
-	path = build/imgs
+	path = old/build/imgs
 	url = http://os.inf.tu-dresden.de/~jsteckli/git/nul-test-imgs.git
 	ignore = untracked
 [submodule "alexb/apps/libvirt/libvirt-repo"]
-	path = alexb/apps/libvirt/libvirt-repo
+	path = old/alexb/apps/libvirt/libvirt-repo
 	url = http://os.inf.tu-dresden.de/~jsteckli/git/libvirt.git
 	ignore = untracked
 [submodule "michal/doc/org-mode"]
-	path = michal/doc/org-mode
+	path = old/michal/doc/org-mode
 	url = git://orgmode.org/org-mode.git
