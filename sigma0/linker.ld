@@ -41,7 +41,7 @@ SECTIONS
   .data :
   {
     __mempoolstart = .;
-    . += __memsize;
+    . += (1 << 23);
     __mempoolend = .;
     __profile_table_start = .;
     KEEP(*(.profile));

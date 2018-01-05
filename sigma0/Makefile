@@ -8,10 +8,30 @@ LFLAGS=\
 -ffreestanding\
 -nostdlib \
 -fno-builtin\
+-fno-stack-protector\
 -march=k8 \
 -mcmodel=small
 
+OFILES= \
+help.o \
+hostsink.o \
+kbd2serial.o \
+logging.o \
+scripting.o \
+serial2kbd.o \
+service_config.o \
+service_fs.o \
+service_per_cpu_timer.o \
+service_tracebuffer.o \
+simplemalloc.o \
+startup.o \
+string.o \
+vars.o \
+vprintf.o \
+
 all:
+	rm -f sigma0.a
 	g++ -nostdinc -I ../include -c *.cc ../service/*.cc
-	gcc -nostdinc -I ../include -c ../libc/string.c ../service/*.S
-	gcc -o sigma0 $(LFLAGS) *.o
+	gcc -nostdinc -I ../include -c ../libc/string.c ../service/*.S fuckubuntu.c
+	ar -qc sigma0.a $(OFILES)
+	gcc -o sigma0 $(LFLAGS) sigma0.o sigma0.a
