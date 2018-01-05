@@ -12,6 +12,11 @@ LFLAGS=\
 -march=k8 \
 -mcmodel=small
 
+CFLAGS=\
+       -fno-stack-protector\
+       -nostdinc\
+       -I ../include
+
 OFILES= \
 help.o \
 hostsink.o \
@@ -31,7 +36,7 @@ vprintf.o \
 
 all:
 	rm -f sigma0.a
-	g++ -nostdinc -I ../include -c *.cc ../service/*.cc
-	gcc -nostdinc -I ../include -c ../libc/string.c ../service/*.S fuckubuntu.c
+	g++ $(CFLAGS) -c *.cc ../service/*.cc
+	gcc $(CFLAGS) -c ../libc/string.c ../service/*.S fuckubuntu.c
 	ar -qc sigma0.a $(OFILES)
 	gcc -o sigma0 $(LFLAGS) sigma0.o sigma0.a
