@@ -14,10 +14,13 @@ LFLAGS=\
 
 CFLAGS=\
        -fno-stack-protector\
+	-fno-threadsafe-statics \
        -nostdinc\
        -I ../include
 
 OFILES= \
+capalloc.o \
+cpp-support.o \
 help.o \
 hostsink.o \
 kbd2serial.o \
@@ -36,7 +39,7 @@ vprintf.o \
 
 all:
 	rm -f sigma0.a
-	g++ $(CFLAGS) -c *.cc ../service/*.cc
-	gcc $(CFLAGS) -c ../libc/string.c ../service/*.S fuckubuntu.c
+	g++ $(CFLAGS) -c *.cc ../service/*.cc ../runtime/*.cc
+	gcc $(CFLAGS) -c ../libc/mem.c ../service/*.S 
 	ar -qc sigma0.a $(OFILES)
 	gcc -o sigma0 $(LFLAGS) sigma0.o sigma0.a

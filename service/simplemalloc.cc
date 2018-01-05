@@ -59,3 +59,4 @@ void * operator new(size_t size, unsigned alignment) { return memalloc(size, ali
 void (*memfree)(void *ptr) = memfree_mempool;
 void   operator delete(void *ptr)    { memfree(ptr); }
 void   operator delete[](void *ptr)  { memfree(ptr);  }
+void   operator delete(void *ptr, unsigned long _)    { memfree(ptr); }
