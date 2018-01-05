@@ -12,4 +12,4 @@ CFLAGS=\
 -mcmodel=small
 
 all:
-	gcc $(CFLAGS) test.s
+	gcc -o jmpdot $(CFLAGS) test.s
