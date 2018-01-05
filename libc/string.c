@@ -15,12 +15,9 @@
  */
 
 /* From glibc-2.14, sysdeps/i386/memset.c */
+#include <nul/types.h>
 
-#include <stdint.h>
-
-#include "string.h"
-
-typedef uint32_t op_t;
+typedef uint32 op_t;
 
 void *memset(void *dstpp, int c, size_t len)
 {
@@ -84,7 +81,7 @@ void *memcpy(void *dest, const void *src, size_t n)
 
 	asm volatile(
 		"rep ; movsl\n\t"
-		"movl %4,%%ecx\n\t"
+		"movq %4,%%rcx\n\t"
 		"rep ; movsb\n\t"
 		: "=&c" (d0), "=&D" (d1), "=&S" (d2)
 		: "0" (n >> 2), "g" (n & 3), "1" (dest), "2" (src)

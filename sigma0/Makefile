@@ -12,5 +12,6 @@ LFLAGS=\
 -mcmodel=small
 
 all:
-	g++ -nostdinc -ffreestanding -I ../include -c *.cc ../libc/string.c
+	g++ -nostdinc -I ../include -c *.cc ../service/*.cc
+	gcc -nostdinc -I ../include -c ../libc/string.c ../service/*.S
 	gcc -o sigma0 $(LFLAGS) *.o
