@@ -28,7 +28,7 @@ SECTIONS
    __image_start = .;
    . +=  SIZEOF_HEADERS;
 
- .text :
+ .text : AT(.)
   {
        /* NOVA header */
        LONG(0x41564f4e);
@@ -38,7 +38,7 @@ SECTIONS
        . = ALIGN(0x1000);
   } : text
 
-  .data :
+  .data : AT(0x800000)
   {
     __mempoolstart = .;
     . += (1<<13);
@@ -58,6 +58,7 @@ SECTIONS
 
   /DISCARD/ :
   {
+    *(.note.gnu.build-id)
     *(.comment);
   }
 }
