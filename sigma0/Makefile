@@ -18,6 +18,9 @@ CFLAGS=\
        -nostdinc\
        -I ../include
 
+HOST=\
+     ../host/hostvesa.cc \
+
 OFILES= \
 capalloc.o \
 cpp-support.o \
@@ -36,10 +39,11 @@ startup.o \
 string.o \
 vars.o \
 vprintf.o \
+hostvesa.o \
 
 all:
 	rm -f sigma0.a
-	g++ $(CFLAGS) -c *.cc ../service/*.cc ../runtime/*.cc
+	g++ $(CFLAGS) -c *.cc ../service/*.cc ../runtime/*.cc $(HOST)
 	gcc $(CFLAGS) -c ../libc/mem.c ../service/*.S 
 	ar -qc sigma0.a $(OFILES)
 	gcc -o sigma0 $(LFLAGS) sigma0.o sigma0.a
