@@ -1,0 +1,2 @@
+#!/bin/bash
+qemu-system-x86_64 -m 8192 -hda /dev/sdb -serial stdio -s
