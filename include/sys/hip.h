@@ -29,7 +29,7 @@ class Hip_cpu
         unsigned char  thread;
         unsigned char  core;
         unsigned char  package;
-        unsigned  reserved;
+        unsigned  int reserved;
 
         bool enabled() const { return (flags & 1) != 0; }
 };
@@ -40,7 +40,7 @@ class Hip_mem
         unsigned long long  addr;
         unsigned long long  size;
         int     type;
-        unsigned  aux;
+        unsigned  int aux;
 };
 
 class Hip
@@ -53,16 +53,17 @@ class Hip
         unsigned short  cpu_size;
         unsigned short  mem_offs;       // Offset of first MEM descriptor
         unsigned short  mem_size;
-        unsigned  api_flg;        // API feature flags
-        unsigned  api_ver;        // API version
-        unsigned  cfg_cap;        // Number of CAPs (SEL)
-        unsigned  cfg_exc;        // Number of Exception portals (EXC)
-        unsigned  cfg_vm;         // Number of VM portals (VMI)
-        unsigned  cfg_gsi;        // Number of GSIs
-        unsigned  cfg_page;       // PAGE sizes
-        unsigned  cfg_utcb;       // UTCB sizes
-        unsigned  freq_tsc;       // TSC freq in khz
-        unsigned  freq_bus;       // BUS freq in khz
+	// Must be 32 bits.
+        unsigned int  api_flg;        // API feature flags
+        unsigned int  api_ver;        // API version
+        unsigned int  cfg_cap;        // Number of CAPs (SEL)
+        unsigned int  cfg_exc;        // Number of Exception portals (EXC)
+        unsigned int  cfg_vm;         // Number of VM portals (VMI)
+        unsigned int  cfg_gsi;        // Number of GSIs
+        unsigned int  cfg_page;       // PAGE sizes
+        unsigned int  cfg_utcb;       // UTCB sizes
+        unsigned int  freq_tsc;       // TSC freq in khz
+        unsigned int  freq_bus;       // BUS freq in khz
 
 
 	unsigned short calc_checksum()

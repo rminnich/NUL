@@ -1876,9 +1876,25 @@ char * s0_ParentProtocol::get_client_memory(unsigned identity, unsigned client_m
   else return mem_revoke;
 }
 
+#if 0
+void Sigma0::start(phy_cpu_no cpu, Utcb *utcb) {
+	__asm__ __volatile__ ("1: jmp 1b\n");
+}
+#endif
+
 void Sigma0::start(phy_cpu_no cpu, Utcb *utcb) {
   extern unsigned __nova_api_version;
+	//__asm__ __volatile__ ("\n.globl global_hip\nmov global_hip, %rbx\n1: jmp 1b\n");
+	if (__nova_api_version != Global::hip.api_ver) {
+	__asm__ __volatile__ ("\n1: jmp 1b\n");
+	}
+#if 0
+	__asm__ __volatile__ ("\n1: jmp 1b\n");
+#endif
   assert(Global::hip.api_ver == __nova_api_version);
+	if (Global::hip.cfg_exc + 0 !=  NOVA_DEFAULT_PD_CAP) {
+	__asm__ __volatile__ ("\n1: jmp 1b\n");
+	}
   assert(Global::hip.cfg_exc + 0 ==  NOVA_DEFAULT_PD_CAP);
   static Sigma0 s0;
   sigma0 = &s0;

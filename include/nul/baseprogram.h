@@ -37,11 +37,11 @@ struct BaseProgram {
 
   /**
    * Get the UTCB pointer from the top of the stack, which is laid out as follows:
-   * - 4: UTCB
-   * - 8: dummy
-   * -12: UTCB
-   * -16: TLS
-   * -20: function pointer
+   * - 8: UTCB
+   * - 16: dummy
+   * -24: UTCB
+   * -32: TLS
+   * -40: function pointer
    *
    * This layout is chosen to make the stack 16-byte aligned.
    */

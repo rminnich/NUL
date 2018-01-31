@@ -33,7 +33,8 @@ SECTIONS
        /* NOVA header */
        LONG(0x41564f4e);
        __nova_api_version = .;
-       LONG(6);
+       /*LONG(6);*/
+       LONG(7);
        *(.text .text.* .gnu.linkonce.t.*);
        . = ALIGN(0x1000);
   } : text

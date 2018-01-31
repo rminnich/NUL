@@ -8,20 +8,20 @@
 
 __start:
         ## EAX contains our CPU number (first parameter to start)
+        mov     %rsp,   %rsi
+#1: jmp 1b
         mov     %rsp,   global_hip
         lea     -0x1000(%rsp), %rdx
         mov     $stack, %rsp
         push    %rdx            # push UTCB -- needed for myutcb()
-        sub     $12, %rsp       # alignment
+        sub     $8, %rsp       # alignment
+##1: jmp 1b
         call	start
         ud2a
 
         .global global_hip
         .section .bss.hip
 global_hip: .space 8
-
-
-        .section .bss.stack
         .align 0x1000
         .space 0x1000
 stack:
