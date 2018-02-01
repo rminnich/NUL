@@ -1,0 +1,20 @@
+# -*- Mode: Python -*-
+
+import nul
+
+Import('target_env')
+
+nul.Lib(target_env,
+        "runtime",
+        SOURCES = [
+        'cpp-support.cc',
+        'string.cc',
+        'capalloc.cc',
+        # compiler-rt
+        'udivdi3.c',
+        'moddi3.c',
+        'umoddi3.c',
+        'udivmoddi4.c',
+        ])
+
+# EOF

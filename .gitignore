@@ -7,3 +7,4 @@ build
 !build/SConstruct
 !build/imgs
 TAGS
+a.out
